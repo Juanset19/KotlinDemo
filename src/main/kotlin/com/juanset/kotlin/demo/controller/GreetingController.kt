@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController
 class GreetingController {
     @GetMapping("/greetings")
     fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String) =
-            ResponseEntity.ok(Greeting("Hello $name"))
+            ResponseEntity.ok(Greeting(content = "Hello $name"))
     // $name is a String template that appends the value of name passed as parameter
+
+    // Greeting.content is set as a named argument. It even works without specifying the class properties name
+    // This may be helpful when a function has a large number of arguments
 }
