@@ -20,10 +20,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
+    runtimeOnly("com.h2database:h2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
 }
 

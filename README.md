@@ -20,4 +20,7 @@ These additional references should also help you:
 * [Kotlin Basic Syntax](https://kotlinlang.org/docs/reference/basic-syntax.html)
 * [Data Classes](https://kotlinlang.org/docs/reference/data-classes.html)
 * [Named arguments](https://kotlinlang.org/docs/reference/functions.html#named-arguments)
+* [Null Safety](https://kotlinlang.org/docs/reference/null-safety.html)
+* [Safe calls](https://kotlinlang.org/docs/reference/null-safety.html#safe-calls)
+* [Lateinit](https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties-and-variables)
 
