@@ -24,6 +24,22 @@ class BookController {
     fun getBooksGroupedByAuthor(): ResponseEntity<Map<String, List<BookResponse>>> {
         return ResponseEntity.ok(bookService.findAll()
                 .map { toBookResponse(it) }
-                .groupBy { "${it.author?.name} ${it.author?.lastName}" })
+                .groupBy { "${it.author?.name?:""} ${it.author?.lastName?:""}" })
+        //FIXME
+        /*return ResponseEntity.ok(bookService.findAll()
+                .map { toBookResponse(it) }
+                .groupBy { it.author?.id.toString() })*/
+    }
+
+    @GetMapping("/by-genre")
+    fun getBooksGroupedByGenre(): ResponseEntity<Map<String, List<BookResponse>>> {
+        return ResponseEntity.ok(bookService.findAll()
+                .map { toBookResponse(it) }
+                .filterNot{ it.genre == null }
+                .groupBy { it.genre!!.name })
+        //FIXME
+        /*return ResponseEntity.ok(bookService.findAll()
+                .map { toBookResponse(it) }
+                .groupBy { it.title })*/
     }
 }

@@ -14,22 +14,27 @@ import org.springframework.test.web.servlet.get
 @SpringBootTest
 @AutoConfigureMockMvc
 class BookControllerTest {
+    private val fantasy = GenreResponse(id = 6, name = "FANTASY")
+    private val romance = GenreResponse(id = 3, name = "ROMANCE")
+    private val history = GenreResponse(id = 1, name = "HISTORY")
     private val gabriel = AuthorResponse(id = 1, name = "Gabriel", lastName = "García Marquez")
     private val hector = AuthorResponse(id = 2, name = "Hector", lastName = "Abad")
     private val efraim = AuthorResponse(id = 3, name = "Efraim", lastName = "Medina")
     private val carl = AuthorResponse(id = 4, name = "Carl", lastName = "Sagan")
     private val cienDeSoledad = BookResponse(id = 1, title = "Cien años de soledad",
-            genre = GenreResponse(id = 6, name = "FANTASY"), author = gabriel)
+            genre = fantasy, author = gabriel)
     private val elOlvido = BookResponse(id = 2, title = "El olvido que seremos",
-            genre = GenreResponse(id = 1, name = "HISTORY"), author = hector)
+            genre = history, author = hector)
     private val eraseUnaVez = BookResponse(id = 3, title = "Érase una vez el amor pero tuve que matarlo",
-            genre = GenreResponse(id = 3, name = "ROMANCE"), author = efraim)
+            genre = romance, author = efraim)
     private val dragonesEden = BookResponse(id = 4, title = "Los dragones del edén",
-            genre = GenreResponse(id = 1, name = "HISTORY"), author = carl)
+            genre = history, author = carl)
     private val relatoNaufrago = BookResponse(id = 5, title = "Relato de un naúfrago",
-            genre = GenreResponse(id = 1, name = "HISTORY"), author = gabriel)
+            genre = history, author = gabriel)
     private val cinemaArbol = BookResponse(id = 6, title = "Cinema Árbol",
-            genre = GenreResponse(id = 1, name = "HISTORY"), author = efraim)
+            genre = history, author = efraim)
+    private val na = BookResponse(id = 7, title = "N/A", genre = null, author = null)
+    private val naP2 = BookResponse(id = 8, title = "N/A Parte 2", genre = null, author = null)
 
     @Autowired
     private lateinit var mockMvc: MockMvc
@@ -43,19 +48,32 @@ class BookControllerTest {
             status { isOk }
             content {
                 json(objectMapper.writeValueAsString(listOf(cienDeSoledad, elOlvido, eraseUnaVez,
-                        dragonesEden, relatoNaufrago, cinemaArbol)))
+                        dragonesEden, relatoNaufrago, cinemaArbol, na, naP2)))
             }
         }
     }
 
     @Test
-    fun `when getting by authors returns data grouped by authors`() {
+    fun `when getting by authors returns data grouped by authors name`() {
         mockMvc.get("/books/by-authors").andExpect {
             status { isOk }
             content {
                 json(objectMapper.writeValueAsString(mapOf("${gabriel.name} ${gabriel.lastName}" to listOf(cienDeSoledad, relatoNaufrago),
                         "${efraim.name} ${efraim.lastName}" to listOf(eraseUnaVez, cinemaArbol),
-                        "${carl.name} ${carl.lastName}" to listOf(dragonesEden))))
+                        "${carl.name} ${carl.lastName}" to listOf(dragonesEden),
+                        " " to listOf(na, naP2))))
+            }
+        }
+    }
+
+    @Test
+    fun `when getting by genre returns data grouped by genre name except books with null genre`() {
+        mockMvc.get("/books/by-genre").andExpect {
+            status { isOk }
+            content {
+                json(objectMapper.writeValueAsString(mapOf(fantasy.name to listOf(cienDeSoledad),
+                        history.name to listOf(elOlvido, dragonesEden, relatoNaufrago, cinemaArbol),
+                        romance.name to listOf(eraseUnaVez))))
             }
         }
     }

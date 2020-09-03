@@ -16,4 +16,6 @@ INSERT INTO book(id, title, genre_id, author_id) VALUES (3, 'Érase una vez el a
 INSERT INTO book(id, title, genre_id, author_id) VALUES (4, 'Los dragones del edén', 1, 4);
 INSERT INTO book(id, title, genre_id, author_id) VALUES (5, 'Relato de un naúfrago', 1, 1);
 INSERT INTO book(id, title, genre_id, author_id) VALUES (6, 'Cinema Árbol', 1, 3);
+INSERT INTO book(id, title) VALUES (7, 'N/A');
+INSERT INTO book(id, title) VALUES (8, 'N/A Parte 2');
 
