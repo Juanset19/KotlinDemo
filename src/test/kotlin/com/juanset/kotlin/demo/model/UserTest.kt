@@ -13,13 +13,13 @@ class UserTest {
     }
 
     @Test
-    fun `when user introduces, then says the name`() {
+    fun `when user introduces and has no nickname, then says the name`() {
         val expectedUser = User(name = "Jhon", lastName = "Doe", address = null, nickname = null)
         assertEquals(expectedUser.introduceYourself(), "Hello, I'm ${expectedUser.name}")
     }
 
     @Test
-    fun `when user introduces, then says the nickname`() {
+    fun `when user introduces and has nickname, then says the nickname`() {
         val expectedUser = User(name = "Jhon", lastName = "Doe", address = null, nickname = "Jhonny")
         assertEquals(expectedUser.introduceYourself(), "Hello, I'm ${expectedUser.nickname}")
     }

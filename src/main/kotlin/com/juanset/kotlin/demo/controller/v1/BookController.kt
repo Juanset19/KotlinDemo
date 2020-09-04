@@ -1,8 +1,6 @@
 package com.juanset.kotlin.demo.controller.v1
 
-import com.juanset.kotlin.demo.model.response.AuthorResponse
 import com.juanset.kotlin.demo.model.response.BookResponse
-import com.juanset.kotlin.demo.model.response.toAuthorResponse
 import com.juanset.kotlin.demo.model.response.toBookResponse
 import com.juanset.kotlin.demo.service.BookService
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,9 +24,8 @@ class BookController {
                 .map { toBookResponse(it) }
                 .groupBy { "${it.author?.name?:""} ${it.author?.lastName?:""}" })
         //FIXME
-        /*return ResponseEntity.ok(bookService.findAll()
-                .map { toBookResponse(it) }
-                .groupBy { it.author?.id.toString() })*/
+        //val books = bookService.findAll().map { toBookResponse(it) }
+        //return ResponseEntity.ok(mapOf("The key should be the complete name of the author" to books))
     }
 
     @GetMapping("/by-genre")
@@ -38,8 +35,7 @@ class BookController {
                 .filterNot{ it.genre == null }
                 .groupBy { it.genre!!.name })
         //FIXME
-        /*return ResponseEntity.ok(bookService.findAll()
-                .map { toBookResponse(it) }
-                .groupBy { it.title })*/
+        //val books = bookService.findAll().map { toBookResponse(it) }
+        //return ResponseEntity.ok(mapOf("The key should be the genre and non-null values should be included" to books))
     }
 }
