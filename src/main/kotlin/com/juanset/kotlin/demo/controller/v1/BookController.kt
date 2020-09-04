@@ -20,22 +20,15 @@ class BookController {
 
     @GetMapping("/by-authors")
     fun getBooksGroupedByAuthor(): ResponseEntity<Map<String, List<BookResponse>>> {
-        return ResponseEntity.ok(bookService.findAll()
-                .map { toBookResponse(it) }
-                .groupBy { "${it.author?.name?:""} ${it.author?.lastName?:""}" })
         //FIXME
-        //val books = bookService.findAll().map { toBookResponse(it) }
-        //return ResponseEntity.ok(mapOf("The key should be the complete name of the author" to books))
+        val books = bookService.findAll().map { toBookResponse(it) }
+        return ResponseEntity.ok(mapOf("The key should be the complete name of the author" to books))
     }
 
     @GetMapping("/by-genre")
     fun getBooksGroupedByGenre(): ResponseEntity<Map<String, List<BookResponse>>> {
-        return ResponseEntity.ok(bookService.findAll()
-                .map { toBookResponse(it) }
-                .filterNot{ it.genre == null }
-                .groupBy { it.genre!!.name })
         //FIXME
-        //val books = bookService.findAll().map { toBookResponse(it) }
-        //return ResponseEntity.ok(mapOf("The key should be the genre and non-null values should be included" to books))
+        val books = bookService.findAll().map { toBookResponse(it) }
+        return ResponseEntity.ok(mapOf("The key should be the genre and non-null values should be included" to books))
     }
 }

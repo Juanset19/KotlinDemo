@@ -1,6 +1,17 @@
 # Kotlin Spring Boot Sample app
 This is a sample app using Spring Boot and Kotlin
 
+# Fix me notes
+
+1. Fix User class so that the application compiles
+2. Fix User.introduceYourself method so that the tests pass successfully.
+This is about nullability check. 
+3. Fix GreetingController get method so that the tests pass successfully.
+4. Fix BookController get method for getting books by author name and last name 
+so that the tests pass successfully.
+5. Fix BookController get method for getting books by non-null genre's name 
+so that the tests pass successfully.
+
 # Getting Started
 
 ### Reference Documentation
